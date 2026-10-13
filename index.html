@@ -1,0 +1,602 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="theme-color" content="#0f1424">
+	<meta name="description" content="Renata Osborne is a full-stack software engineer with 5+ years of experience building production web applications with Ruby on Rails, Hotwire, Stimulus and TypeScript.">
+	<title>Renata Osborne | Full-Stack Engineer</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+	<style>
+		:root, :root[data-theme="dark"] {
+			color-scheme: dark;
+			--bg: #0f1424;
+			--bg-2: #161c33;
+			--card: #1a2140;
+			--ink: #eef0fb;
+			--muted: #9aa3c4;
+			--line: #2a3258;
+			--mint: #64f0c8;
+			--pink: #ff6b9a;
+			--lilac: #b4a6ff;
+			--sun: #ffd27a;
+			--sky-top: #0b1020;
+			--sky-bottom: #1e2550;
+			--orb: #f6e7c1;
+			--orb-glow: rgba(255, 210, 122, .35);
+			--m1: #262e5c;
+			--m2: #1d2449;
+			--m3: #161c38;
+			--tree: #10152b;
+			--tile-1: rgba(180, 166, 255, .14);
+			--tile-2: rgba(255, 107, 154, .14);
+			--tile-3: rgba(255, 210, 122, .14);
+			--tile-4: rgba(100, 240, 200, .14);
+			--star: 1;
+		}
+		:root[data-theme="light"] {
+			color-scheme: light;
+			--bg: #fdf3e7;
+			--bg-2: #f8e6d2;
+			--card: #ffffff;
+			--ink: #2a1530;
+			--muted: #6e5a68;
+			--line: #ecd3bf;
+			--mint: #0f9e7a;
+			--pink: #d6336c;
+			--lilac: #6c55e0;
+			--sun: #b86e00;
+			--sky-top: #fbe3c4;
+			--sky-bottom: #f6ac88;
+			--orb: #fff1c9;
+			--orb-glow: rgba(255, 241, 201, .8);
+			--m1: #e8987a;
+			--m2: #cc6f66;
+			--m3: #93405a;
+			--tree: #4b1d38;
+			--tile-1: #ece6ff;
+			--tile-2: #ffe1ea;
+			--tile-3: #fff0cc;
+			--tile-4: #dcf7ee;
+			--star: 0;
+		}
+		* { box-sizing: border-box; }
+		html { scroll-behavior: smooth; }
+		body { margin: 0; background: var(--bg); color: var(--ink); font-family: "Inter", system-ui, sans-serif; font-size: 16px; line-height: 1.6; transition: background .3s ease, color .3s ease; }
+		a { color: inherit; }
+		button { font: inherit; color: inherit; }
+		h1, h2, h3, p { margin-top: 0; }
+		.mono { font-family: "JetBrains Mono", ui-monospace, monospace; }
+		.wrap { width: min(1160px, calc(100% - 64px)); margin-inline: auto; }
+		:focus-visible { outline: 2px solid var(--mint); outline-offset: 3px; border-radius: 4px; }
+
+		/* Top bar */
+		.topbar { position: fixed; inset: 0 0 auto; z-index: 20; transition: background .3s ease, backdrop-filter .3s ease; }
+		.topbar.scrolled { background: color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+		.topbar-row { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+		.wordmark { font-family: "JetBrains Mono", monospace; font-size: 18px; font-weight: 600; color: var(--mint); text-decoration: none; white-space: nowrap; }
+		.wordmark .cursor { display: inline-block; width: 10px; height: 2px; margin-left: 2px; background: var(--pink); vertical-align: baseline; animation: blink 1.1s steps(1) infinite; }
+		.nav { display: flex; align-items: center; gap: 28px; }
+		.nav a { position: relative; font-family: "JetBrains Mono", monospace; font-size: 14px; font-weight: 600; text-decoration: none; }
+		.nav a small { position: absolute; top: -12px; right: 0; color: var(--muted); font-size: 9px; }
+		.nav a span { color: var(--pink); }
+		.nav a:hover { color: var(--mint); }
+		.tools { display: flex; align-items: center; gap: 10px; }
+		.theme-switch { display: flex; align-items: center; gap: 8px; border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px 6px 6px; background: var(--card); cursor: pointer; font-family: "JetBrains Mono", monospace; font-size: 12px; }
+		.theme-switch .knob { width: 34px; height: 20px; border-radius: 999px; background: var(--line); position: relative; }
+		.theme-switch .knob::after { content: ""; position: absolute; top: 3px; left: 3px; width: 14px; height: 14px; border-radius: 50%; background: var(--sun); transition: transform .25s ease; }
+		:root[data-theme="light"] .theme-switch .knob::after { transform: translateX(14px); }
+		.menu-button { display: none; border: 1px solid var(--line); border-radius: 10px; padding: 7px 12px; background: var(--card); cursor: pointer; font-family: "JetBrains Mono", monospace; font-size: 13px; }
+
+		/* Hero */
+		.hero { position: relative; min-height: max(680px, 100svh); overflow: hidden; background: linear-gradient(var(--sky-top), var(--sky-bottom) 70%); display: flex; align-items: flex-start; }
+		.hero-inner { position: relative; z-index: 3; padding-top: clamp(130px, 18vh, 190px); text-align: center; width: 100%; }
+		.hello { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 18px; color: var(--muted); font-family: "JetBrains Mono", monospace; font-size: 14px; }
+		.hello .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--mint); box-shadow: 0 0 0 4px color-mix(in srgb, var(--mint) 25%, transparent); }
+		h1 { margin: 0 auto 18px; font-family: "Bricolage Grotesque", sans-serif; font-size: clamp(54px, 10vw, 132px); font-weight: 800; line-height: .92; letter-spacing: -.02em; text-transform: uppercase; }
+		h1 .accent { position: relative; color: var(--mint); white-space: nowrap; }
+		h1 .accent svg { position: absolute; left: 2%; bottom: -14px; width: 96%; height: 22px; color: var(--pink); }
+		.role-line { margin: 26px 0 30px; font-family: "JetBrains Mono", monospace; font-size: clamp(13px, 1.6vw, 17px); font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
+		.role-line span { color: var(--pink); }
+		.hero-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 14px; }
+		.button { min-height: 48px; display: inline-flex; align-items: center; gap: 8px; border: 2px solid var(--ink); border-radius: 999px; padding: 0 22px; background: var(--mint); color: #0f1424; font-weight: 600; font-size: 15px; text-decoration: none; box-shadow: 4px 4px 0 var(--ink); transition: transform .15s ease, box-shadow .15s ease; cursor: pointer; }
+		.button:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--ink); }
+		.button.ghost { background: transparent; color: var(--ink); box-shadow: none; border-color: var(--line); }
+		.button.ghost:hover { border-color: var(--ink); box-shadow: none; }
+		.sticker { position: absolute; z-index: 4; right: max(4%, calc((100% - 1160px) / 2)); top: 150px; transform: rotate(8deg); padding: 12px 16px; border: 2px solid var(--ink); border-radius: 18px 18px 18px 4px; background: var(--sun); color: #2a1530; font-family: "Bricolage Grotesque", sans-serif; font-size: 15px; font-weight: 800; line-height: 1.1; text-align: center; text-transform: uppercase; animation: bob 4s ease-in-out infinite; }
+		.landscape { position: absolute; inset: auto 0 0; z-index: 1; width: 100%; height: 52%; }
+		.landscape svg { width: 100%; height: 100%; display: block; }
+		.orb { position: absolute; z-index: 0; left: 50%; bottom: 30%; width: 130px; height: 130px; margin-left: -65px; border-radius: 50%; background: var(--orb); box-shadow: 0 0 80px 30px var(--orb-glow); }
+		.stars { position: absolute; inset: 0 0 40%; z-index: 0; opacity: var(--star); transition: opacity .4s ease; }
+		.stars i { position: absolute; width: 3px; height: 3px; border-radius: 50%; background: #fff; animation: twinkle 3s ease-in-out infinite; }
+		.birds { position: absolute; z-index: 2; left: 12%; top: 46%; width: 120px; color: var(--tree); opacity: calc(1 - var(--star)); transition: opacity .4s ease; }
+		.scroll-cue { position: absolute; z-index: 3; left: 50%; bottom: 26px; width: 26px; height: 42px; margin-left: -13px; border: 2px solid var(--ink); border-radius: 999px; }
+		.scroll-cue::after { content: ""; position: absolute; left: 50%; top: 8px; width: 4px; height: 8px; margin-left: -2px; border-radius: 2px; background: var(--pink); animation: scroll 1.8s ease-in-out infinite; }
+
+		/* Sections */
+		.section { padding-block: 110px; scroll-margin-top: 60px; }
+		.label { display: inline-flex; gap: 8px; margin-bottom: 14px; color: var(--pink); font-family: "JetBrains Mono", monospace; font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+		.label::before { content: "//"; color: var(--muted); }
+		h2 { position: relative; display: inline-block; max-width: 760px; margin-bottom: 20px; font-family: "Bricolage Grotesque", sans-serif; font-size: clamp(36px, 5vw, 58px); font-weight: 800; line-height: 1.02; letter-spacing: -.015em; }
+		.doodle-star { position: absolute; top: -18px; right: -38px; width: 30px; color: var(--sun); animation: spin 12s linear infinite; }
+		.lead { max-width: 640px; color: var(--muted); font-size: 18px; }
+
+		/* About */
+		.about-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 56px; align-items: start; margin-top: 30px; }
+		.about-copy p { color: var(--muted); font-size: 17px; line-height: 1.8; }
+		.about-copy strong { color: var(--ink); font-weight: 600; }
+		.tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+		.tile { border: 1px solid var(--line); border-radius: 22px; padding: 20px; transition: transform .2s ease; }
+		.tile:hover { transform: translateY(-4px) rotate(-1deg); }
+		.tile:nth-child(1) { background: var(--tile-1); }
+		.tile:nth-child(2) { background: var(--tile-2); }
+		.tile:nth-child(3) { background: var(--tile-3); }
+		.tile:nth-child(4) { background: var(--tile-4); }
+		.tile .icon { width: 38px; height: 38px; display: grid; place-items: center; margin-bottom: 14px; border-radius: 12px; background: var(--card); font-size: 18px; }
+		.tile strong { display: block; font-family: "Bricolage Grotesque", sans-serif; font-size: 40px; font-weight: 800; line-height: 1; }
+		.tile span { color: var(--muted); font-size: 13px; }
+
+		/* Work */
+		.work { background: var(--bg-2); }
+		.work-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; margin-top: 40px; }
+		.project { display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: 24px; overflow: hidden; background: var(--card); transition: transform .2s ease, border-color .2s ease; }
+		.project:hover { transform: translateY(-5px); border-color: var(--mint); }
+		.project-art { height: 150px; display: grid; place-items: center; }
+		.project-art svg { width: 120px; height: 120px; }
+		.project:nth-child(1) .project-art { background: linear-gradient(135deg, #64f0c8, #3aa7d6); }
+		.project:nth-child(2) .project-art { background: linear-gradient(135deg, #b4a6ff, #ff6b9a); }
+		.project:nth-child(3) .project-art { background: linear-gradient(135deg, #ffd27a, #ff8a5c); }
+		.project:nth-child(4) .project-art { background: linear-gradient(135deg, #ff6b9a, #7a3fb0); }
+		.project-body { padding: 24px 26px 26px; display: flex; flex-direction: column; flex: 1; }
+		.project-body h3 { margin-bottom: 8px; font-family: "Bricolage Grotesque", sans-serif; font-size: 24px; font-weight: 700; line-height: 1.15; }
+		.project-body p { color: var(--muted); font-size: 15px; }
+		.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 6px; }
+		.chip { border-radius: 999px; padding: 5px 12px; background: color-mix(in srgb, var(--mint) 16%, transparent); color: var(--mint); font-family: "JetBrains Mono", monospace; font-size: 12px; font-weight: 600; }
+
+		/* Experience */
+		.timeline { margin-top: 40px; border-left: 2px dashed var(--line); padding-left: 0; list-style: none; }
+		.job { position: relative; display: grid; grid-template-columns: 220px 1fr; gap: 32px; padding: 0 0 46px 34px; }
+		.job::before { content: ""; position: absolute; left: -9px; top: 6px; width: 16px; height: 16px; border-radius: 50%; border: 3px solid var(--bg); background: var(--pink); box-shadow: 0 0 0 2px var(--pink); }
+		.job:first-child::before { background: var(--mint); box-shadow: 0 0 0 2px var(--mint); }
+		.job-meta { color: var(--muted); font-family: "JetBrains Mono", monospace; font-size: 13px; }
+		.job-meta b { display: block; margin-bottom: 4px; color: var(--ink); font-size: 14px; }
+		.job h3 { margin-bottom: 10px; font-family: "Bricolage Grotesque", sans-serif; font-size: 26px; font-weight: 700; }
+		.job h3 span { color: var(--muted); font-weight: 500; }
+		.job ul { margin: 0; padding-left: 18px; color: var(--muted); }
+		.job li { margin-bottom: 6px; }
+		.job li::marker { color: var(--pink); }
+
+		/* Skills */
+		.skills-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: 40px; }
+		.skill-group { border: 1px solid var(--line); border-radius: 22px; padding: 22px; background: var(--card); }
+		.skill-group h3 { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; font-family: "JetBrains Mono", monospace; font-size: 14px; font-weight: 600; color: var(--lilac); }
+		.skill-group .chips { padding-top: 0; }
+		.skill-group .chip { background: var(--bg-2); color: var(--ink); border: 1px solid var(--line); font-weight: 400; }
+		.extras { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 18px; }
+		.extras .skill-group p { margin: 0 0 6px; color: var(--muted); font-size: 15px; }
+		.extras .skill-group p b { color: var(--ink); font-weight: 600; }
+
+		/* Playground */
+		.playground { border: 2px solid var(--ink); border-radius: 28px; padding: clamp(24px, 4vw, 44px); background: var(--lilac); color: #1b1235; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; box-shadow: 8px 8px 0 var(--ink); }
+		.playground .label { color: #1b1235; }
+		.playground .label::before { color: #4a3a80; }
+		.playground h2 { font-size: clamp(30px, 4vw, 42px); margin-bottom: 10px; }
+		.playground p { margin: 0; color: #33295a; font-size: 15px; }
+		.weather-form { display: flex; gap: 8px; }
+		.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
+		.weather-form input { flex: 1; min-width: 0; min-height: 50px; border: 2px solid #1b1235; border-radius: 14px; padding: 0 14px; background: #f5f2ff; color: #1b1235; font: inherit; }
+		.weather-form button { min-height: 50px; border: 2px solid #1b1235; border-radius: 14px; padding: 0 18px; background: #1b1235; color: #fff; font-weight: 600; cursor: pointer; }
+		.units { display: flex; gap: 6px; margin-top: 10px; }
+		.units button { border: 1px solid #1b1235; border-radius: 999px; padding: 3px 12px; background: transparent; color: #1b1235; font-family: "JetBrains Mono", monospace; font-size: 12px; cursor: pointer; }
+		.units button[aria-pressed="true"] { background: #1b1235; color: #fff; }
+		.weather-result { min-height: 26px; margin-top: 12px !important; font-weight: 600; color: #1b1235 !important; }
+
+		/* Contact */
+		.contact { text-align: center; }
+		.contact h2 { display: block; max-width: 820px; margin-inline: auto; font-size: clamp(42px, 7vw, 86px); }
+		.contact h2 em { font-style: normal; color: var(--pink); }
+		.contact .lead { margin-inline: auto; margin-bottom: 34px; }
+		.contact-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 14px; }
+		.contact-meta { display: flex; justify-content: center; flex-wrap: wrap; gap: 22px; margin-top: 30px; color: var(--muted); font-family: "JetBrains Mono", monospace; font-size: 13px; }
+		.contact-meta a { text-decoration: none; }
+		.contact-meta a:hover { color: var(--mint); }
+		.copy-status { min-height: 22px; margin-top: 12px; color: var(--mint); font-family: "JetBrains Mono", monospace; font-size: 13px; }
+
+		footer { border-top: 1px solid var(--line); padding-block: 28px; color: var(--muted); font-family: "JetBrains Mono", monospace; font-size: 12px; }
+		.footer-row { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+		.footer-row p { margin: 0; }
+
+		/* Reveal on scroll */
+		.reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+		.reveal.in { opacity: 1; transform: none; }
+
+		@keyframes blink { 50% { opacity: 0; } }
+		@keyframes bob { 50% { transform: rotate(5deg) translateY(-8px); } }
+		@keyframes twinkle { 50% { opacity: .2; } }
+		@keyframes scroll { 0% { opacity: 0; transform: translateY(0); } 40% { opacity: 1; } 100% { opacity: 0; transform: translateY(14px); } }
+		@keyframes spin { to { transform: rotate(360deg); } }
+
+		@media (max-width: 900px) {
+			.nav { display: none; position: absolute; top: 70px; right: 16px; flex-direction: column; align-items: flex-start; gap: 18px; min-width: 200px; padding: 22px; border: 1px solid var(--line); border-radius: 18px; background: var(--card); }
+			.nav.open { display: flex; }
+			.nav a small { position: static; margin-right: 6px; }
+			.menu-button { display: block; }
+			.about-grid, .playground { grid-template-columns: 1fr; gap: 30px; }
+			.skills-grid { grid-template-columns: 1fr 1fr; }
+			.sticker { display: none; }
+		}
+		@media (max-width: 680px) {
+			.wrap { width: calc(100% - 32px); }
+			.theme-switch .label-text { display: none; }
+			.theme-switch { padding-right: 6px; }
+			.section { padding-block: 76px; }
+			.work-grid, .skills-grid, .extras { grid-template-columns: 1fr; }
+			.job { grid-template-columns: 1fr; gap: 8px; padding-left: 26px; }
+			.weather-form { flex-direction: column; }
+			.doodle-star { right: -10px; top: -26px; }
+			.birds { display: none; }
+		}
+		@media (prefers-reduced-motion: reduce) {
+			*, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+			.reveal { opacity: 1; transform: none; }
+		}
+		@media print {
+			:root { --bg: #fff; --bg-2: #fff; --card: #fff; --ink: #111; --muted: #444; --line: #ccc; --mint: #0f7a5f; --pink: #b0245a; --lilac: #4a3ab0; }
+			.topbar, .landscape, .orb, .stars, .birds, .sticker, .scroll-cue, .hero-actions, .playground-section, .contact-actions, .copy-status, footer { display: none !important; }
+			.hero { min-height: 0; background: none; }
+			.hero-inner { padding-top: 0; text-align: left; }
+			h1 { font-size: 40pt; }
+			h1 .accent svg { display: none; }
+			.section { padding-block: 18px; }
+			.reveal { opacity: 1; transform: none; }
+			.project, .job, .skill-group, .tile { break-inside: avoid; }
+			.project-art { display: none; }
+		}
+	</style>
+</head>
+<body>
+	<header class="topbar" id="topbar">
+		<div class="topbar-row wrap">
+			<a class="wordmark" href="#top" aria-label="Renata Osborne, back to top">renata.osborne<span class="cursor"></span></a>
+			<nav class="nav" id="nav" aria-label="Main navigation">
+				<a href="#about"><small>01</small><span>//</span> about</a>
+				<a href="#work"><small>02</small><span>//</span> work</a>
+				<a href="#experience"><small>03</small><span>//</span> experience</a>
+				<a href="#skills"><small>04</small><span>//</span> skills</a>
+				<a href="#contact"><small>05</small><span>//</span> contact</a>
+			</nav>
+			<div class="tools">
+				<button class="theme-switch" id="theme-switch" type="button" aria-label="Switch between dark and light mode"><span class="knob"></span><span class="label-text" id="theme-label">dark</span></button>
+				<button class="menu-button" id="menu-button" type="button" aria-expanded="false" aria-controls="nav">menu</button>
+			</div>
+		</div>
+	</header>
+
+	<main id="top">
+		<section class="hero" aria-labelledby="hero-title">
+			<div class="stars" id="stars" aria-hidden="true"></div>
+			<div class="orb" aria-hidden="true"></div>
+			<svg class="birds" viewBox="0 0 120 50" aria-hidden="true" fill="currentColor"><path d="M10 30 q8-10 16 0 q-8-5-16 0z"/><path d="M45 14 q10-12 20 0 q-10-6-20 0z"/><path d="M85 26 q6-8 12 0 q-6-4-12 0z"/></svg>
+			<div class="hero-inner wrap">
+				<p class="hello"><span class="dot"></span>Hi, I'm open to new full-stack roles</p>
+				<h1 id="hero-title">Renata<br><span class="accent">Osborne<svg viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true"><path d="M3 14 C60 4, 120 18, 180 8 S270 6, 297 12" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/></svg></span></h1>
+				<p class="role-line">Full-stack engineer <span>·</span> Ruby on Rails <span>·</span> TypeScript</p>
+				<div class="hero-actions">
+					<a class="button" href="#work">See my work →</a>
+					<a class="button ghost" href="#contact">Say hello</a>
+				</div>
+			</div>
+			<p class="sticker" aria-hidden="true">Let's build<br>something<br>useful!</p>
+			<div class="landscape" aria-hidden="true">
+				<svg viewBox="0 0 1440 520" preserveAspectRatio="xMidYMax slice">
+					<path fill="var(--m1)" d="M0 330 L120 270 L210 300 L330 190 L430 260 L540 170 L650 250 L760 150 L880 240 L990 190 L1100 260 L1210 160 L1330 240 L1440 200 V520 H0Z"/>
+					<path fill="#fff" opacity=".18" d="M330 190 L300 218 L322 212 L340 226 L362 210 Z M760 150 L728 182 L752 174 L770 190 L792 172 Z M1210 160 L1180 190 L1202 182 L1222 196 L1242 180 Z"/>
+					<path fill="var(--m2)" d="M0 400 L140 320 L260 370 L380 290 L500 360 L640 280 L780 360 L900 310 L1040 370 L1180 300 L1320 360 L1440 320 V520 H0Z"/>
+					<path fill="var(--m3)" d="M0 450 C200 400 380 440 560 410 C760 380 960 440 1160 400 C1290 380 1380 400 1440 395 V520 H0Z"/>
+					<g id="trees" fill="var(--tree)"></g>
+					<path fill="var(--bg)" d="M0 500 C300 478 520 512 760 494 C1000 478 1220 506 1440 490 V520 H0Z"/>
+				</svg>
+			</div>
+			<span class="scroll-cue" aria-hidden="true"></span>
+		</section>
+
+		<section class="section wrap" id="about" aria-labelledby="about-title">
+			<div class="reveal">
+				<p class="label">01 about</p>
+				<h2 id="about-title">I help build products from the very first line of code.<svg class="doodle-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 2 L24 16 L38 20 L24 24 L20 38 L16 24 L2 20 L16 16Z" fill="currentColor"/></svg></h2>
+			</div>
+			<div class="about-grid">
+				<div class="about-copy reveal">
+					<p>I'm a full-stack software engineer with <strong>5+ years of experience</strong> building, shipping and supporting production web applications. Most of my work is in <strong>Ruby on Rails</strong>, together with <strong>Hotwire, Stimulus, JavaScript and TypeScript</strong> on the frontend.</p>
+					<p>At <strong>benefitbay</strong>, I joined as one of two engineers on the original four-person team and worked closely with the VP of Engineering to build our insurance technology platform from scratch. Being on a small team meant I worked on the whole process: planning and designing features, then building, testing, deploying and supporting them in production.</p>
+					<p>Before engineering, I worked in <strong>project management</strong> in international teams, and that still shapes how I work: clear communication, practical priorities and caring about the people who use what we build.</p>
+				</div>
+				<div class="tiles reveal" aria-label="Quick facts">
+					<div class="tile"><div class="icon" aria-hidden="true">🚀</div><strong>5+</strong><span>years shipping production web apps</span></div>
+					<div class="tile"><div class="icon" aria-hidden="true">👩‍💻</div><strong>2</strong><span>engineers on the team when I joined</span></div>
+					<div class="tile"><div class="icon" aria-hidden="true">👥</div><strong>4</strong><span>people on the original benefitbay team</span></div>
+					<div class="tile"><div class="icon" aria-hidden="true">🌍</div><strong>3</strong><span>languages: Czech, English, French</span></div>
+				</div>
+			</div>
+		</section>
+
+		<section class="work" id="work" aria-labelledby="work-title">
+			<div class="section wrap">
+				<div class="reveal">
+					<p class="label">02 work</p>
+					<h2 id="work-title">Things I've built</h2>
+					<p class="lead">Highlights from five years at benefitbay, building a customer-facing insurance technology platform.</p>
+				</div>
+				<div class="work-grid">
+					<article class="project reveal">
+						<div class="project-art" aria-hidden="true"><svg viewBox="0 0 120 120" fill="none" stroke="#0f1424" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M34 18 h36 l18 18 v66 h-54z" fill="#fff"/><path d="M70 18 v18 h18"/><path d="M61 82 V54 M49 66 l12-12 12 12"/></svg></div>
+						<div class="project-body">
+							<h3>Standalone document upload</h3>
+							<p>I designed and built a flow that lets prospective clients submit their documents <em>before</em> creating an account, which made it easier for people to get started.</p>
+							<div class="chips"><span class="chip">Ruby on Rails</span><span class="chip">Hotwire</span><span class="chip">Stimulus</span></div>
+						</div>
+					</article>
+					<article class="project reveal">
+						<div class="project-art" aria-hidden="true"><svg viewBox="0 0 120 120" fill="none" stroke="#0f1424" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><rect x="14" y="40" width="34" height="40" rx="8" fill="#fff"/><rect x="72" y="40" width="34" height="40" rx="8" fill="#fff"/><path d="M48 52 h24 M64 44 l8 8 -8 8 M72 70 h-24 M56 62 l-8 8 8 8"/></svg></div>
+						<div class="project-body">
+							<h3>Insurance and healthcare data integrations</h3>
+							<p>I integrated third-party APIs to retrieve and process insurance, healthcare provider and prescription information, and brought that data into the product.</p>
+							<div class="chips"><span class="chip">REST APIs</span><span class="chip">Ruby</span><span class="chip">SQL</span></div>
+						</div>
+					</article>
+					<article class="project reveal">
+						<div class="project-art" aria-hidden="true"><svg viewBox="0 0 120 120" fill="none" stroke="#0f1424" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><rect x="18" y="22" width="84" height="60" rx="8" fill="#fff"/><path d="M30 40 h40 M30 54 h56 M30 68 h28"/><rect x="44" y="90" width="32" height="10" rx="3"/></svg></div>
+						<div class="project-body">
+							<h3>Responsive full-stack features</h3>
+							<p>I built and maintained responsive interfaces and data-collection workflows across the stack, and shaped UI decisions before a dedicated designer joined.</p>
+							<div class="chips"><span class="chip">TypeScript</span><span class="chip">Hotwire</span><span class="chip">PostgreSQL</span></div>
+						</div>
+					</article>
+					<article class="project reveal">
+						<div class="project-art" aria-hidden="true"><svg viewBox="0 0 120 120" fill="none" stroke="#0f1424" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><circle cx="60" cy="60" r="38" fill="#fff"/><path d="M42 60 l12 12 24-26"/></svg></div>
+						<div class="project-body">
+							<h3>Production quality and team practice</h3>
+							<p>I worked on testing, code reviews and deployments, fixed issues on the live system, and was the team's Scrum Master, helping prioritize work from customer feedback.</p>
+							<div class="chips"><span class="chip">Git / GitHub</span><span class="chip">Testing</span><span class="chip">Scrum</span></div>
+						</div>
+					</article>
+				</div>
+			</div>
+		</section>
+
+		<section class="section wrap" id="experience" aria-labelledby="experience-title">
+			<div class="reveal">
+				<p class="label">03 experience</p>
+				<h2 id="experience-title">Where I've worked</h2>
+			</div>
+			<ol class="timeline">
+				<li class="job reveal">
+					<div class="job-meta"><b>Apr 2021 – May 2026</b>Insurance technology startup</div>
+					<div>
+						<h3>Software Engineer <span>@ benefitbay</span></h3>
+						<ul>
+							<li>One of two engineers at the startup stage; helped design, develop and evolve the platform from scratch.</li>
+							<li>Built full-stack features with Ruby on Rails, Hotwire, Stimulus and TypeScript.</li>
+							<li>Worked with product stakeholders and designers to shape requirements and improve workflows.</li>
+							<li>Served as Scrum Master, supporting team coordination and Agile practices.</li>
+						</ul>
+					</div>
+				</li>
+				<li class="job reveal">
+					<div class="job-meta"><b>Oct 2020 – Mar 2021</b>Omaha, Nebraska, USA</div>
+					<div>
+						<h3>Software Developer <span>@ Coding Temple</span></h3>
+						<ul>
+							<li>Built full-stack web applications with Python, Flask, React and JavaScript.</li>
+							<li>Developed responsive pages, consumed RESTful APIs and fixed bugs.</li>
+						</ul>
+					</div>
+				</li>
+				<li class="job reveal">
+					<div class="job-meta"><b>Aug 2016 – Aug 2020</b>Omaha, Nebraska, USA</div>
+					<div>
+						<h3>Project Manager <span>@ Melitta North America</span></h3>
+						<ul>
+							<li>Coordinated sales, customer, logistics and internal stakeholders across concurrent projects.</li>
+							<li>Created team procedures, trained employees and contributed to an SAP development project.</li>
+						</ul>
+					</div>
+				</li>
+				<li class="job reveal">
+					<div class="job-meta"><b>Mar 2015 – Aug 2016</b></div>
+					<div>
+						<h3>General Manager <span>@ Vintage Dictionary Art</span></h3>
+						<ul><li>Managed day-to-day operations and represented products at trade shows and sales events.</li></ul>
+					</div>
+				</li>
+			</ol>
+		</section>
+
+		<section class="work" id="skills" aria-labelledby="skills-title">
+			<div class="section wrap">
+				<div class="reveal">
+					<p class="label">04 skills</p>
+					<h2 id="skills-title">My toolkit</h2>
+				</div>
+				<div class="skills-grid">
+					<div class="skill-group reveal"><h3>⚙️ backend</h3><div class="chips"><span class="chip">Ruby on Rails</span><span class="chip">Ruby</span><span class="chip">Python</span><span class="chip">Flask</span><span class="chip">RESTful APIs</span><span class="chip">Third-party integrations</span></div></div>
+					<div class="skill-group reveal"><h3>🎨 frontend</h3><div class="chips"><span class="chip">TypeScript</span><span class="chip">JavaScript</span><span class="chip">Hotwire</span><span class="chip">Stimulus</span><span class="chip">React</span><span class="chip">HTML</span><span class="chip">Responsive UI</span></div></div>
+					<div class="skill-group reveal"><h3>🗄️ data &amp; delivery</h3><div class="chips"><span class="chip">PostgreSQL</span><span class="chip">MySQL</span><span class="chip">SQL</span><span class="chip">Git / GitHub</span><span class="chip">Code reviews</span><span class="chip">Automated testing</span><span class="chip">Deployment</span><span class="chip">Production debugging</span></div></div>
+				</div>
+				<div class="extras">
+					<div class="skill-group reveal"><h3>🎓 education &amp; certification</h3><p><b>Coding Temple</b>: Full-Stack Software Developer program (2020)</p><p><b>Université de La Rochelle, France</b>: Bachelor's, Chinese for International Business</p><p><b>Certified ScrumMaster®</b></p></div>
+					<div class="skill-group reveal"><h3>🤝 how I collaborate</h3><p>Agile/Scrum, product discovery, UI/UX collaboration and cross-functional teamwork.</p><p>Czech (native) · English (fluent) · French (fluent)</p></div>
+				</div>
+			</div>
+		</section>
+
+		<section class="section wrap playground-section" aria-labelledby="weather-title">
+			<div class="playground reveal">
+				<div>
+					<p class="label">playground</p>
+					<h2 id="weather-title">A tiny API integration, live.</h2>
+					<p>Type a city and this page calls two public APIs, one to find the place and one to get the weather. Nothing is saved.</p>
+				</div>
+				<div>
+					<form class="weather-form" id="weather-form">
+						<label class="sr-only" for="city">City</label>
+						<input id="city" name="city" type="text" autocomplete="address-level2" placeholder="Try Bruntál" required>
+						<button type="submit">Check weather</button>
+					</form>
+					<div class="units" role="group" aria-label="Temperature unit">
+						<button type="button" data-unit="celsius" aria-pressed="true">°C</button>
+						<button type="button" data-unit="fahrenheit" aria-pressed="false">°F</button>
+					</div>
+					<p class="weather-result" id="weather-result" aria-live="polite" role="status"></p>
+				</div>
+			</div>
+		</section>
+
+		<section class="section wrap contact" id="contact" aria-labelledby="contact-title">
+			<div class="reveal">
+				<p class="label">05 contact</p>
+				<h2 id="contact-title">Let's build something <em>useful</em> together.</h2>
+				<p class="lead">I'm looking for a collaborative engineering team where I can contribute my experience and keep growing. If that sounds like your team, I'd love to talk.</p>
+				<div class="contact-actions">
+					<a class="button" href="mailto:renata.se.osborne@gmail.com">Email me ✉</a>
+					<button class="button ghost" type="button" id="copy-email">Copy email</button>
+					<button class="button ghost" type="button" onclick="window.print()">Print / save as PDF</button>
+				</div>
+				<p class="copy-status" id="copy-status" aria-live="polite"></p>
+				<div class="contact-meta">
+					<a href="https://www.linkedin.com/in/renata-osborne-5a3569190" target="_blank" rel="noopener">↗ LinkedIn</a>
+					<a href="https://github.com/renataosborne" target="_blank" rel="noopener">↗ GitHub</a>
+					<a href="mailto:renata.se.osborne@gmail.com">renata.se.osborne@gmail.com</a>
+					<span>📍 Bruntál, Czech Republic</span>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<footer><div class="footer-row wrap"><p>© 2026 Renata Osborne</p><p>&lt;built with care, curiosity &amp; a little Rails /&gt;</p></div></footer>
+
+	<script>
+		// Theme toggle
+		const root = document.documentElement;
+		const themeLabel = document.querySelector("#theme-label");
+		const metaTheme = document.querySelector('meta[name="theme-color"]');
+		const applyTheme = (theme) => {
+			root.dataset.theme = theme;
+			themeLabel.textContent = theme;
+			metaTheme.content = theme === "dark" ? "#0f1424" : "#fdf3e7";
+		};
+		try { const saved = localStorage.getItem("theme"); if (saved) applyTheme(saved); } catch {}
+		document.querySelector("#theme-switch").addEventListener("click", () => {
+			const next = root.dataset.theme === "dark" ? "light" : "dark";
+			applyTheme(next);
+			try { localStorage.setItem("theme", next); } catch {}
+		});
+
+		// Mobile menu
+		const nav = document.querySelector("#nav");
+		const menuButton = document.querySelector("#menu-button");
+		menuButton.addEventListener("click", () => {
+			const open = nav.classList.toggle("open");
+			menuButton.setAttribute("aria-expanded", open);
+		});
+		nav.addEventListener("click", (e) => { if (e.target.closest("a")) { nav.classList.remove("open"); menuButton.setAttribute("aria-expanded", false); } });
+
+		// Top bar background after scrolling
+		const topbar = document.querySelector("#topbar");
+		const onScroll = () => topbar.classList.toggle("scrolled", window.scrollY > 40);
+		window.addEventListener("scroll", onScroll, { passive: true });
+		onScroll();
+
+		// Stars and pine trees
+		const stars = document.querySelector("#stars");
+		for (let i = 0; i < 60; i++) {
+			const s = document.createElement("i");
+			s.style.left = `${Math.random() * 100}%`;
+			s.style.top = `${Math.random() * 100}%`;
+			s.style.animationDelay = `${Math.random() * 3}s`;
+			s.style.transform = `scale(${0.5 + Math.random()})`;
+			stars.appendChild(s);
+		}
+		const trees = document.querySelector("#trees");
+		let treeShapes = "";
+		for (let x = -10; x < 1460; x += 14 + Math.random() * 18) {
+			const h = 40 + Math.random() * 60;
+			const w = h * 0.38;
+			const base = 470 + Math.sin(x / 140) * 16 + Math.random() * 8;
+			treeShapes += `<path d="M${x} ${base - h} L${x + w / 2} ${base} L${x - w / 2} ${base}Z"/>`;
+		}
+		trees.innerHTML = treeShapes;
+
+		// Reveal on scroll
+		const observer = new IntersectionObserver((entries) => {
+			entries.forEach((entry) => { if (entry.isIntersecting) { entry.target.classList.add("in"); observer.unobserve(entry.target); } });
+		}, { threshold: 0.12 });
+		document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+
+		// Copy email
+		document.querySelector("#copy-email").addEventListener("click", async () => {
+			const status = document.querySelector("#copy-status");
+			try { await navigator.clipboard.writeText("renata.se.osborne@gmail.com"); status.textContent = "Copied! ✓"; }
+			catch { status.textContent = "renata.se.osborne@gmail.com"; }
+		});
+
+		// Weather playground
+		const form = document.querySelector("#weather-form");
+		const cityInput = document.querySelector("#city");
+		const result = document.querySelector("#weather-result");
+		let unit = "celsius";
+		document.querySelectorAll(".units button").forEach((btn) => {
+			btn.addEventListener("click", () => {
+				unit = btn.dataset.unit;
+				document.querySelectorAll(".units button").forEach((b) => b.setAttribute("aria-pressed", b === btn));
+				if (cityInput.value.trim()) form.requestSubmit();
+			});
+		});
+
+		const weatherDescription = (code) => {
+			if (code === 0) return "clear skies ☀️";
+			if ([1, 2].includes(code)) return "partly cloudy ⛅";
+			if (code === 3) return "overcast ☁️";
+			if ([45, 48].includes(code)) return "foggy 🌫️";
+			if ([51, 53, 55, 56, 57].includes(code)) return "drizzle 🌦️";
+			if ([61, 63, 65, 66, 67, 80, 81, 82].includes(code)) return "rainy 🌧️";
+			if ([71, 73, 75, 77, 85, 86].includes(code)) return "snowy ❄️";
+			if ([95, 96, 99].includes(code)) return "thunderstorms ⛈️";
+			return "changing skies";
+		};
+
+		form.addEventListener("submit", async (event) => {
+			event.preventDefault();
+			const city = cityInput.value.trim();
+			if (!city) return;
+			result.textContent = "Looking up the weather...";
+			try {
+				const locationResponse = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}&count=1&language=en&format=json`);
+				if (!locationResponse.ok) throw new Error("Location lookup failed");
+				const locationData = await locationResponse.json();
+				const place = locationData.results?.[0];
+				if (!place) {
+					result.textContent = "I couldn't find that city. Try another spelling or a nearby city.";
+					return;
+				}
+				const params = new URLSearchParams({
+					latitude: place.latitude,
+					longitude: place.longitude,
+					current: "temperature_2m,apparent_temperature,weather_code",
+					temperature_unit: unit,
+					timezone: "auto"
+				});
+				const weatherResponse = await fetch(`https://api.open-meteo.com/v1/forecast?${params}`);
+				if (!weatherResponse.ok) throw new Error("Weather lookup failed");
+				const { current } = await weatherResponse.json();
+				const symbol = unit === "celsius" ? "°C" : "°F";
+				result.textContent = `${place.name}${place.country ? `, ${place.country}` : ""}: ${Math.round(current.temperature_2m)}${symbol}, ${weatherDescription(current.weather_code)}. Feels like ${Math.round(current.apparent_temperature)}${symbol}.`;
+			} catch {
+				result.textContent = "Weather is unavailable right now. Please try again in a moment.";
+			}
+		});
+	</script>
+</body>
+</html>
